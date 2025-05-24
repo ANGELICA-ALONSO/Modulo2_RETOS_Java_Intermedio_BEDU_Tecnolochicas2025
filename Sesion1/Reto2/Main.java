@@ -6,7 +6,7 @@ import Sesion1.Reto2.MaterialCurso.Articulo;
 import Sesion1.Reto2.MaterialCurso.Ejercicio;
 import Sesion1.Reto2.MaterialCurso.Video;
 import Sesion1.Reto2.MaterialCurso;
-import Sesion1.Reto2.MaterialCurso.mostrarDetalle;
+import Sesion1.Reto2.MaterialCurso;
 
 
 public class Main {
