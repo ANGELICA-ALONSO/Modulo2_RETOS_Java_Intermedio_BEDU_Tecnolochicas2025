@@ -7,10 +7,14 @@ public class OrdenPersonalizada extends GestionOrdenes.OrdenProduccion{
         super(codigo, cantidad);
         this.cliente = cliente;
     }
-    
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString() + ", cliente: " + cliente;
+
+    public int getCantidad(){
+        return super.getCantidad();
     }
+
+    public void setCantidad(int cantidad) {
+        super.setCantidad(cantidad);
+    }
+
+
 }
