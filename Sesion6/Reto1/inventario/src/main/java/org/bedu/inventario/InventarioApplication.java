@@ -13,20 +13,18 @@ public class InventarioApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ProductoRepository repository) {
+	public CommandLineRunner demo(ProductoRepository productoRepo, CategoriaRepository categoriaRepo) {
 		return (args) -> {
+			Categoria tecnologia = new Categoria("Tecnología");
+			categoriaRepo.save(tecnologia);
 			//Guardar algunos productos
-			repository.save(new Producto("Laptop", "Portátil de 16 pulgadas", 1200.00));
-			repository.save(new Producto("Teclado", "Switch azul", 800.00));
-			repository.save(new Producto("Mouse gamer", "Alta precisión", 600.00));
+			productoRepo.save(new Producto("Laptop ASUS ROG Strix SCAR 18", "Intel Core i9, RTX 5090", 90000.00, tecnologia));
+			productoRepo.save(new Producto("Laptop MSI Titan 18 HX", "Intel core i9, RTX 4090", 140000.00, tecnologia));
+			productoRepo.save(new Producto("Tablet Lenovo", "Pantalla 10 pulgadas", 7800.00, tecnologia));
 
-			//Mostrar todos los procuctos
-			System.out.println("Productos disponibles:");
-			repository.findAll().forEach(System.out::println);
-
-			//Buscar por nombre parcial
-			System.out.println("\n Productos que contienen 'Lap':");
-			repository.findByNombreContaining("Lap").forEach(System.out::println);
+			//Mostrar todos los procuctos registrados
+			System.out.println("Productos registrados:");
+			productoRepo.findAll().forEach(p -> System.out.println(p.getNombre() + " - " + p.getCategoria().getNombre()));
 		};
 	}
 

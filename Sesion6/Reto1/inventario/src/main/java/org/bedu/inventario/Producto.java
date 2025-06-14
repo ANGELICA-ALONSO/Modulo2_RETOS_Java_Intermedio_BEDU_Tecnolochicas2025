@@ -1,9 +1,13 @@
 package org.bedu.inventario;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Producto {
@@ -14,13 +18,17 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private double precio;
+    @ManyToOne
+    @JoinColumn(name = "categoria_id") // nombre de la columna FK (clave foranea) en la tabla productos
+    private Categoria categoria;
 
     protected Producto(){}
 
-    public Producto(String nombre, String descripcion, double precio) {
+    public Producto(String nombre, String descripcion, double precio, Categoria categoria) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.categoria = categoria;
     }
 
     //Getter para acceder a los atributos necesarios para el funcionamiento de JPA y buenas prácticas.
@@ -40,9 +48,13 @@ public class Producto {
         return precio;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     //Método que permite imprimir el botjeto de forma legible (útil para logs o consola)
     @Override
     public String toString() {
-        return String.format("Producto[id=%d, nombre='%s', precio=%.2f]", id, nombre, precio);
+        return String.format("Producto[id=%d, nombre='%s', precio=%.2f, categoria='%s']", id, nombre, precio, categoria != null ? categoria.getNombre() : "Sin categoria");
     }
 }
