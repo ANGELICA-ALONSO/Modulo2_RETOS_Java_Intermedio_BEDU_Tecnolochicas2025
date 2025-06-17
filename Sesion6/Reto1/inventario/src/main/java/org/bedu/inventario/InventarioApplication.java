@@ -1,6 +1,6 @@
 package org.bedu.inventario;
 
-import org.bedu.inventario.models.Categoria;
+
 import org.bedu.inventario.models.Producto;
 import org.bedu.inventario.repositories.ProductoRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -26,6 +26,23 @@ public class InventarioApplication {
 			//Mostrar todos los procuctos registrados
 			System.out.println("Productos registrados:");
 			productoRepo.findAll().forEach(System.out::println);
+
+			//Mostrar Productos con precio mayor a 500
+			System.out.println("Productos con precio mayor a 500");
+			productoRepo.findByPrecioGreaterThan(500.0).forEach(System.out::println);
+
+			// Mostrar Productos que contienen 'lap'
+			System.out.println("Mostrar Productos que contienen 'lap'");
+			productoRepo.findByNombreContainingIgnoreCase("lap").forEach(System.out::println);
+
+
+			// Mostrar Productos con precio entre 400 y 1000
+			System.out.println("Mostrar Productos con precio entre 400 y 1000");
+			productoRepo.findByPrecioBetween(400, 1000);
+
+			// Mostrar Productos cuyo nombre empieza con 'm'
+			System.out.println("Mostrar Productos cuyo nombre empieza con 'm'");
+			productoRepo.findByNombreStartingWithIgnoreCase("m");
 		};
 	}
 

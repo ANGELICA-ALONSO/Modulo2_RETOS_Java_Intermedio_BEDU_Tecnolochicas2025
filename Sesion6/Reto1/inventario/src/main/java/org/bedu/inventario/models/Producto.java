@@ -15,8 +15,11 @@ public class Producto {
     @Id // Campo que funcionara como clave primaria de la tabla PrimaryKey.
     @GeneratedValue(strategy = GenerationType.IDENTITY) //El ID se generará automáticamente (autoincremental)    
     private Long id;
+    @NotBlank
     private String nombre;
+    @NotBlank
     private String descripcion;
+    @Min(1)
     private double precio;
     @ManyToOne
     @JoinColumn(name = "categoria_id") // nombre de la columna FK (clave foranea) en la tabla productos
