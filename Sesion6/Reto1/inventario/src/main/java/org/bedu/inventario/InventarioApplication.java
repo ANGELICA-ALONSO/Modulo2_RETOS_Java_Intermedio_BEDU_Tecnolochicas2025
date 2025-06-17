@@ -1,5 +1,8 @@
 package org.bedu.inventario;
 
+import org.bedu.inventario.models.Categoria;
+import org.bedu.inventario.models.Producto;
+import org.bedu.inventario.repositories.ProductoRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,18 +16,16 @@ public class InventarioApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ProductoRepository productoRepo, CategoriaRepository categoriaRepo) {
-		return (args) -> {
-			Categoria tecnologia = new Categoria("Tecnología");
-			categoriaRepo.save(tecnologia);
+	public CommandLineRunner initData(ProductoRepository productoRepo) {
+		return args -> {
 			//Guardar algunos productos
-			productoRepo.save(new Producto("Laptop ASUS ROG Strix SCAR 18", "Intel Core i9, RTX 5090", 90000.00, tecnologia));
-			productoRepo.save(new Producto("Laptop MSI Titan 18 HX", "Intel core i9, RTX 4090", 140000.00, tecnologia));
-			productoRepo.save(new Producto("Tablet Lenovo", "Pantalla 10 pulgadas", 7800.00, tecnologia));
+			productoRepo.save(new Producto("Laptop Lenovo", "AMD Ryzen 7, 16GB RAM", 18500.00));
+			productoRepo.save(new Producto("Mouse Inalámbrico", "Marca Logitech, sensor óptico", 350.00));
+			productoRepo.save(new Producto("Monitor LG", "27 pulgadas, Full HD", 4300.00));
 
 			//Mostrar todos los procuctos registrados
 			System.out.println("Productos registrados:");
-			productoRepo.findAll().forEach(p -> System.out.println(p.getNombre() + " - " + p.getCategoria().getNombre()));
+			productoRepo.findAll().forEach(System.out::println);
 		};
 	}
 
