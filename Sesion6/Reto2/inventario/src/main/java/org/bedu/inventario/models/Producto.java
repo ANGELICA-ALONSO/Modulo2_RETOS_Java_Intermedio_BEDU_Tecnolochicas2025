@@ -25,12 +25,17 @@ public class Producto {
     @JoinColumn(name = "categoria_id") // nombre de la columna FK (clave foranea) en la tabla productos
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
+
     protected Producto(){}
 
-    public Producto(String nombre, String descripcion, double precio ) {
+    public Producto(String nombre, String descripcion, double precio, Marca marca) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.marca = marca;
     }
 
     //Getter para acceder a los atributos necesarios para el funcionamiento de JPA y buenas prácticas.
@@ -54,9 +59,13 @@ public class Producto {
         return categoria;
     }
 
-    //Método que permite imprimir el botjeto de forma legible (útil para logs o consola)
+    public Marca getMarca() {
+        return marca;
+    }
+
     @Override
     public String toString() {
-        return String.format("Producto[id=%d, nombre='%s', precio=%.2f, categoria='%s']", id, nombre, precio, categoria != null ? categoria.getNombre() : "Sin categoria");
+        return "Producto [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
+                + ", categoria=" + categoria + ", marca=" + marca + "]";
     }
 }
